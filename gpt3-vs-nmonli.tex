@@ -1,0 +1,556 @@
+\documentclass[11pt]{article}
+
+\usepackage[utf8]{inputenc}
+\usepackage[T1, OT2,OT1]{fontenc}
+\usepackage{textcomp}
+\usepackage[scale={0.81,0.95}, centering, includeheadfoot]{geometry}
+\usepackage[charter]{mathdesign}
+\usepackage{natbib}
+\usepackage{amsmath}
+\usepackage{xcolor}
+\definecolor{black}{rgb}{0,0,0}
+\usepackage[colorlinks, linkcolor=black, urlcolor=blue, citecolor=black]{hyperref}
+\usepackage{graphicx}
+\usepackage{fancyhdr}
+\usepackage{booktabs}
+\usepackage{inconsolata}
+
+\newcommand{\promptExample}[1]{
+    {\centering
+    \textbf{Prompt example}\\
+    \framebox{
+      \begin{minipage}[c]{1\textwidth}
+        #1
+    \end{minipage}}}}
+
+\newcommand{\mydblnewline}{{\color{gray}\\{\textbackslash n\textbackslash n\\}}}
+\newcommand{\mynewline}{{\color{gray}{\textbackslash n\\}}}
+\newcommand{\word}[1]{\emph{#1}}
+
+%=====================================================================
+%=====================================================================
+
+\begin{document}
+
+\pagestyle{fancy}
+\lhead{}
+\rhead{}
+\lfoot{}
+\cfoot{\thepage}
+\rfoot{}
+\renewcommand{\headrulewidth}{0pt}
+
+\begin{center}
+  {\Large\textbf{Does GPT-3 really understand negation?}} \\[1ex]
+  Christopher Potts \\
+  (with input from Selena She, Atticus Geiger, and
+  Omar Khattab; all conclusions, and any mistakes, are my own)
+
+\end{center}
+
+%=====================================================================
+%=====================================================================
+
+\section{Background}
+
+Sam Bowman wrote a blog post that included this claim:
+%
+\begin{quote}
+  It's still easy to find extremely strong negative claims about these
+  models from serious researchers, such as that LLMs don't have the
+  capacity to handle negation (i.e., that they won’t be appropriately
+  sensitive to it even in typical cases that look like language model
+  training data). Ten minutes of interaction with the OpenAI API
+  sandbox should be sufficient to refute this, but the academic
+  conversation often anchors primarily on older systems or on smaller
+  systems that are practical to run on academic clusters.
+
+  \url{https://wp.nyu.edu/arg/why-ai-safety/} (October 6, 2022;
+  updated October 8, 2022)
+\end{quote}
+%
+On my reading, this is a claim that the best OpenAI models as of this
+writing make correct predictions about simple cases involving
+negation, and that this is self-evident from basic interactions with
+these models.
+
+If this is true, then it is a major discovery and a significant sign
+of progress. If it is incorrect, then it raises real concerns for me
+as someone who cares about this topic. Bowman is very influential, and
+statements like this can shape people's attitudes about what it is
+worthwhile to work on.
+
+No evidence is provided in the above post. Free-form interaction with
+the API is very unlikely to lead to reliable evidence, since it is
+unlikely to involve systematic exploration of a wide range of cases
+with careful, predefined criteria for success. In general, free-form
+interaction leaves one susceptible to confirmation bias.
+
+In this document, I report on my own investigations. The high-level
+summary is that in a balanced test set of 200 diverse sentences
+involving basic interactions of negation with lexical entailment
+relations, the best I was able to do was 62\% accuracy (chance is
+50\%).
+
+It may be that there are prompting strategies that will yield better
+results, but I do not think it is trivial to find them, and so I think
+this actually challenges Bowman's characterization above. It may be
+that Bowman agrees with this fundamental point, since the following
+thread asserts that the desired behavior can be elicited with very
+careful methods (which are not disclosed in the thread as of this
+writing):
+\\
+\url{https://twitter.com/sleepinyourhat/status/1578878667207294977}
+
+
+\newpage
+
+\section{Dataset structure}
+
+This dataset was created by Selena She and Atticus Geiger this past
+summer. It extends \href{https://github.com/atticusg/MoNLI}{the MoNLI
+  dataset} with lots of different kinds of negated example.
+%
+\begin{center}
+  \footnotesize
+  \begin{tabular}{@{} l p{0.33\textwidth} c p{0.33\textwidth} @{}}
+    \toprule
+    split &sentence1 &  gold\_label & sentence2 \\
+    \midrule
+    one scoping &       The guests do not have food. &  entailment &  The guests do not have rice. \\
+    one scoping &       A child is not tossing blocks &     neutral & A child is not tossing anything \\\midrule
+    both not scoping &  The not allergic person did like cranberries but prefers not to eat vegetables. &  entailment &  The not allergic person did like fruit but prefers not to eat vegetables. \\
+    both not scoping &  A man who is not here is holding something, but not in his hands. &     neutral & A man who is not here is holding stamps, but not in his hands. \\\midrule
+    one not scoping &   The skier noticed a large elm branch dragging behind him but did not move it. &  entailment &  The skier noticed a large tree branch dragging behind him but did not move it. \\
+    one not scoping &   the boy plays an instrument, but he does not want to play anymore. &     neutral & the boy plays a fiddle, but he does not want to play anymore. \\\midrule
+    one scoping, one not & People who are not wealthy do not have any computers &  entailment & People who are not wealthy do not have any laptops \\
+    one scoping, one not & The woman who did not like clothes did not like meatloaf. &  neutral & The woman who did not like clothes did not like meat. \\
+    \bottomrule
+  \end{tabular}
+\end{center}
+
+
+\section{Methods}
+
+\begin{enumerate}
+\item Engine: \texttt{text-davinci-002}
+\item The experimental runs given below were conducted on October 9, 2022.
+\item Temperature: 0.0
+\item Per-split distribution:
+
+\begin{tabular}{lrr}
+\toprule
+ &  entailment &  neutral \\
+\midrule
+both not scoping     &          25 &       25 \\
+one not scoping      &          25 &       25 \\
+one scoping          &          25 &       25 \\
+one scoping, one not &          25 &       25 \\
+\bottomrule
+\end{tabular}
+
+\item Label inference: If the response contains ``yes'' (case-insensitive),
+  then we infer the label \texttt{entailment}, else we infer
+  \texttt{neutral}.
+
+\item Across experiments, the only thing that varies is the nature of
+  the prompt function.
+
+\item Below, I've indicated all actual newlines with
+  {\color{gray}\textbackslash n}. The newlines in
+  the latex formatting are just to make them intuitive to read.
+
+\end{enumerate}
+
+\newpage
+
+\section{Experiments}
+
+\subsection{Conditional Question Prompt}
+
+\promptExample{Is it true that if we didn't eat pizza, then we didn't eat food?}
+
+\begin{center}
+\begin{tabular}{lrrr}
+\toprule
+{} &  Incorrect &  Correct &  Accuracy \\
+\midrule
+both not scoping     &         22 &       28 &      0.56 \\
+one not scoping      &         23 &       27 &      0.54 \\
+one scoping          &         25 &       25 &      0.50 \\
+one scoping, one not &         25 &       25 &      0.50 \\
+All                  &         95 &      105 &      0.53 \\
+\bottomrule
+\end{tabular}
+\end{center}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\subsection{Few-Shot Conditional Question Prompt}
+
+\promptExample{Q1: Is it true that if the men were outside trying to keep their voices down so as not to waken any woman indoors, then the men were outside trying to keep their voices down so as not to waken any bachelorette indoors?\mynewline
+A1: Yes\mynewline
+\mynewline
+Q2: Is it true that if the person did not like any fruit, then the person did not like any cranberries?\mynewline
+A2: Yes\mynewline
+\mynewline
+Q3: Is it true that if the woman is not wearing earrings, then the woman is not wearing jewelry?\mynewline
+A3: Maybe\mynewline
+\mynewline
+Q4: Is it true that if the diver has not seen any tuna on his dive, then the diver has not seen any fish on his dive?\mynewline
+A4: Maybe\mynewline
+\mynewline
+Q: Is it true that if we didn't eat pizza, then we didn't eat food?\mynewline
+A:}
+
+\begin{center}
+\begin{tabular}{lrrr}
+\toprule
+{} &  Incorrect &  Correct &  Accuracy \\
+\midrule
+both not scoping     &         15 &       35 &      0.70 \\
+one not scoping      &         19 &       31 &      0.62 \\
+one scoping          &         26 &       24 &      0.48 \\
+one scoping, one not &         26 &       24 &      0.48 \\
+All                  &         86 &      114 &      0.57 \\
+\bottomrule
+\end{tabular}
+\end{center}
+
+\newpage
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\subsection{Hypothesis Question Prompt}
+
+\promptExample{Assume that we didn't eat pizza. Is it then definitely true that we didn't eat food? Answer Yes or No.}
+
+\begin{center}
+\begin{tabular}{lrrr}
+\toprule
+{} &  Incorrect &  Correct &  Accuracy \\
+\midrule
+both not scoping     &         20 &       30 &      0.60 \\
+one not scoping      &         22 &       28 &      0.56 \\
+one scoping          &         21 &       29 &      0.58 \\
+one scoping, one not &         21 &       29 &      0.58 \\
+All                  &         84 &      116 &      0.58 \\
+\bottomrule
+\end{tabular}
+\end{center}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\subsection{Few-Shot Hypothesis Question Prompt}
+
+\promptExample{Q1: Assume that the two people are not fishing from a boat. Is it then definitely true that the two people are not fishing from a gondola? Answer Yes or No.\mynewline
+A1: Yes\mynewline
+\mynewline
+Q2: Assume that the guests do not have food. Is it then definitely true that the guests do not have rice? Answer Yes or No.\mynewline
+A2: Yes\mynewline
+\mynewline
+Q3: Assume that the diver has not seen any tuna on his dive. Is it then definitely true that the diver has not seen any fish on his dive? Answer Yes or No.\mynewline
+A3: No\mynewline
+\mynewline
+Q4: Assume that two people are not fishing from a skiff. Is it then definitely true that two people are not fishing from a boat? Answer Yes or No.\mynewline
+A4: No\mynewline
+\mynewline
+Q: Assume that we didn't eat pizza. Is it then definitely true that we didn't eat food? Answer Yes or No.\mynewline
+A:}
+
+\begin{center}
+\begin{tabular}{lrrr}
+\toprule
+{} &  Incorrect &  Correct &  Accuracy \\
+\midrule
+both not scoping     &         10 &       40 &      0.80 \\
+one not scoping      &         19 &       31 &      0.62 \\
+one scoping          &         21 &       29 &      0.58 \\
+one scoping, one not &         25 &       25 &      0.50 \\
+All                  &         75 &      125 &      0.62 \\
+\bottomrule
+\end{tabular}
+\end{center}
+
+\newpage
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\subsection{Conditional Truth Evaluation Prompt}
+
+\promptExample{If we didn't eat pizza, then we didn't eat food. Is this true?}
+
+\begin{center}
+\begin{tabular}{lrrr}
+\toprule
+{} &  Incorrect &  Correct &  Accuracy \\
+\midrule
+both not scoping     &         21 &       29 &      0.58 \\
+one not scoping      &         20 &       30 &      0.60 \\
+one scoping          &         25 &       25 &      0.50 \\
+one scoping, one not &         25 &       25 &      0.50 \\
+All                  &         91 &      109 &      0.55 \\
+\bottomrule
+\end{tabular}
+\end{center}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\subsection{Few-Shot Conditional Truth Evaluation Prompt}
+
+\promptExample{C1: If the people are not playing instruments, then the people are not playing flutes. Is this true?\mynewline
+A1: Yes\mynewline
+\mynewline
+C2: If the guests do not have food, then the guests do not have rice. Is this true?\mynewline
+A2: Yes\mynewline
+\mynewline
+C3: If the people are not playing tambourines, then the people are not playing instruments. Is this true?\mynewline
+A3: Maybe\mynewline
+\mynewline
+C4: If there is not a single painter walking in the city, then there is not a single person walking in the city. Is this true?\mynewline
+A4: Maybe\mynewline
+\mynewline
+C:If we didn't eat pizza, then we didn't eat food. Is this true?\mynewline
+A:}
+
+\begin{center}
+\begin{tabular}{lrrr}
+\toprule
+{} &  Incorrect &  Correct &  Accuracy \\
+\midrule
+both not scoping     &          8 &       42 &      0.84 \\
+one not scoping      &         13 &       37 &      0.74 \\
+one scoping          &         28 &       22 &      0.44 \\
+one scoping, one not &         30 &       20 &      0.40 \\
+All                  &         79 &      121 &      0.60 \\
+\bottomrule
+\end{tabular}
+\end{center}
+
+\newpage
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\subsection{Brown et al.-style Prompt}
+
+\promptExample{C: We didn't eat pizza\mynewline
+Q: We didn't eat food. Yes, No, or Maybe?}
+
+\begin{center}
+\begin{tabular}{lrrr}
+\toprule
+{} &  Incorrect &  Correct &  Accuracy \\
+\midrule
+both not scoping     &         22 &       28 &      0.56 \\
+one not scoping      &         23 &       27 &      0.54 \\
+one scoping          &         25 &       25 &      0.50 \\
+one scoping, one not &         25 &       25 &      0.50 \\
+All                  &         95 &      105 &      0.53 \\
+\bottomrule
+\end{tabular}
+\end{center}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\subsection{Few-Shot Brown et al.-style Prompt}
+
+\promptExample{C1: The man is not listening to music.\mynewline
+Q1: The man is not listening to reggae. Yes, No, or Maybe?\mynewline
+A2: Yes\mynewline
+\mynewline
+C2: The woman is not wearing jewelry\mynewline
+Q2: The woman is not wearing necklaces. Yes, No, or Maybe?\mynewline
+A3: Yes\mynewline
+\mynewline
+C3: A woman did not like soup.\mynewline
+Q3: A woman did not like food. Yes, No, or Maybe?\mynewline
+A4: Maybe\mynewline
+\mynewline
+C4: A child is not tossing blocks\mynewline
+Q4: A child is not tossing anything. Yes, No, or Maybe?\mynewline
+A5: Maybe\mynewline
+\mynewline
+C: We didn't eat pizza\mynewline
+Q: We didn't eat food. Yes, No, or Maybe?\mynewline
+A:}
+
+\begin{center}
+\begin{tabular}{lrrr}
+\toprule
+{} &  Incorrect &  Correct &  Accuracy \\
+\midrule
+both not scoping     &         12 &       38 &      0.76 \\
+one not scoping      &         16 &       34 &      0.68 \\
+one scoping          &         31 &       19 &      0.38 \\
+one scoping, one not &         33 &       17 &      0.34 \\
+All                  &         92 &      108 &      0.54 \\
+\bottomrule
+\end{tabular}
+\end{center}
+
+\newpage
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\subsection{Structured Prompt}
+
+\promptExample{P: We didn't eat pizza\mynewline
+H: We didn't eat food\mynewline
+L:}
+
+\begin{center}
+\begin{tabular}{lrrr}
+\toprule
+{} &  Incorrect &  Correct &  Accuracy \\
+\midrule
+both not scoping     &         25 &       25 &      0.50 \\
+one not scoping      &         25 &       25 &      0.50 \\
+one scoping          &         25 &       25 &      0.50 \\
+one scoping, one not &         25 &       25 &      0.50 \\
+All                  &        100 &      100 &      0.50 \\
+\bottomrule
+\end{tabular}
+\end{center}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\subsection{Few-Shot Structured Prompt}
+
+\promptExample{P1: A woman did not like food.\mynewline
+H1: A woman did not like burritos.\mynewline
+L1: entailment\mynewline
+\mynewline
+P2: There is not a single person walking in the city.\mynewline
+H2: There is not a single official walking in the city.\mynewline
+L2: entailment\mynewline
+\mynewline
+P3: People do not have any computers\mynewline
+H3: People do not have any machines\mynewline
+L3: neutral\mynewline
+\mynewline
+P4: There is not a tugboat nearby.\mynewline
+H4: There is not a boat nearby.\mynewline
+L4: neutral \mynewline
+\mynewline
+P: We didn't eat pizza\mynewline
+H: We didn't eat food\mynewline
+L:}
+
+\begin{center}
+\begin{tabular}{lrrr}
+\toprule
+{} &  Incorrect &  Correct &  Accuracy \\
+\midrule
+both not scoping     &         25 &       25 &      0.50 \\
+one not scoping      &         25 &       25 &      0.50 \\
+one scoping          &         25 &       25 &      0.50 \\
+one scoping, one not &         25 &       25 &      0.50 \\
+All                  &        100 &      100 &      0.50 \\
+\bottomrule
+\end{tabular}
+\end{center}
+
+\newpage
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\subsection{Reasoning Prompt}
+
+\promptExample{Logical and commonsense reasoning exam.\mynewline
+\mynewline
+Explain your reasoning in detail, then answer with Yes or No. Your answers should follow this 4-line format:\mynewline
+\mynewline
+Premise: <a tricky logical statement about the world>.\mynewline
+Question: <question requiring logical deduction>.\mynewline
+Reasoning: <an explanation of what you understand about the possible scenarios>.\mynewline
+Answer: <Yes or No>.\mynewline
+\mynewline
+Premise: we didn't eat pizza \mynewline
+Question: Can we logically conclude for sure that we didn't eat food? \mynewline
+Reasoning: Let's think logically step by step. The premise basically tells us that}
+
+\begin{center}
+\begin{tabular}{lrrr}
+\toprule
+{} &  Incorrect &  Correct &  Accuracy \\
+\midrule
+both not scoping     &         19 &       31 &      0.62 \\
+one not scoping      &         20 &       30 &      0.60 \\
+one scoping          &         21 &       29 &      0.58 \\
+one scoping, one not &         19 &       31 &      0.62 \\
+All                  &         79 &      121 &      0.60 \\
+\bottomrule
+\end{tabular}
+\end{center}
+
+
+\subsection{Reasoning Prompt Error Analysis}
+
+The reasoning prompt responses might provide some insights into how
+systematic the model's behavior actually is. Some observations:
+%
+\begin{enumerate}
+\item For premise \word{The man is not allergic to any snakes} and
+  hypothesis \word{The man is not allergic to any pythons} (an
+  entailment
+  case), the model continues from ``The premise basically tells us
+  that'' with
+
+  \texttt{the man has no allergies to snakes in general. That doesn't
+    mean that he can't be allergic to a specific type of snake, such
+    as a python. So the answer is No, we cannot logically conclude for
+    sure that the man is not allergic to any pythons.}
+
+  A charitable interpretation is that it has interpreted the \word{any}
+  forms as generics. This explains a lot of the mistakes it makes
+  in these simple negation cases.
+
+\item Relatedly, some things labeled mistakes seems defensible. For
+  example, for
+  premise  \word{The woman liked corn, not exercise.} and hypothesis
+  \word{The woman liked food, not exercise.} (an entailment case), the
+  model continues from ``The premise basically tells us that'' with
+
+  \texttt{the woman liked corn, not exercise. We can't assume that she
+    liked food just because she liked corn. She might just have a
+    specific taste for corn. We can't logically conclude that she
+    liked food, not exercise.\mynewline
+    Answer: No}
+
+  This can be read as reflecting how unstable reasoning is with
+  generics.
+
+\item Very often, the model seems to get lost as it reasons,
+  leading to a jumble of reasoning steps that do not form a coherent
+  argument. For example, for premise \word{The people not wearing blue
+    are not playing instruments}
+  and hypothesis \word{The people not wearing blue are not playing
+    tambourines.} (an entailment case), the model continues from ``The
+  premise basically tells us that'' with
+
+  \texttt{there are two groups of people- those not wearing blue and those
+  playing instruments. It's possible that there are people who are not
+  wearing blue and are playing instruments, but we can't say for sure.
+  It's also possible that there are people who are not wearing blue
+  and are not playing instruments. We can't say for sure that the
+  people not wearing blue are not playing tambourines, but it's more
+  likely than the alternative.\mynewline
+  Answer: No}
+
+\item I was struck by the fact that the model caught one kind of case
+  that shouldn't be in our dataset. For premise \word{The boy can find
+    a turtle, just not now.} and hypothesis \word{The boy can find a
+    reptile, just not now.}, we assign the label entailment. However,
+  the model tends to give answers that convey neutral, with the
+  reasoning that \word{just not now} has created a non-monotonic
+  reasoning environment.
+
+\item Sometimes it seems like the model is simply reasoning
+  incorrectly about exactly what we care about.
+  For example, for premise \word{A woman liked food, not exercise}
+  and hypothesis \word{A woman liked pudding, not exercise},
+  the model continues from ``The
+  premise basically tells us that'' with
+
+  \texttt{the woman liked food and not exercise. So, we can logically
+    conclude that she liked pudding and not exercise.\mynewline
+    Answer: Yes}
+
+
+\end{enumerate}
+
+%=====================================================================
+%=====================================================================
+
+
+\end{document}

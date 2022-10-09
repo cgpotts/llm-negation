@@ -1,0 +1,201 @@
+sentence1,sentence2,gold_label,split
+The man is not allergic to any snakes.,The man is not allergic to any pythons.,entailment,one scoping
+The person did not like any fruit.,The person did not like any grapes.,entailment,one scoping
+A woman did not like any food.,A woman did not like any pudding.,entailment,one scoping
+The girls are cutting the cake and not letting any man cut it.,The girls are cutting the cake and not letting any boyfriends cut it.,entailment,one scoping
+The people are not playing instruments.,The people are not playing flutes.,entailment,one scoping
+The person did not like fruit.,The person did not like raspberries.,entailment,one scoping
+There is not a single person walking in the city.,There is not a single cheerleader walking in the city.,entailment,one scoping
+The two people are not fishing from a boat,The two people are not fishing from a gondola,entailment,one scoping
+the boy does not play any instrument,the boy does not play any saxophone,entailment,one scoping
+The person did not like any fruit.,The person did not like any cranberries.,entailment,one scoping
+There is not a single person walking in the city.,There is not a single official walking in the city.,entailment,one scoping
+There is not a single person walking in the city.,There is not a single hunter walking in the city.,entailment,one scoping
+The woman is not wearing jewelry,The woman is not wearing rings,entailment,one scoping
+The men were outside trying to keep their voices down so as not to waken any woman indoors,The men were outside trying to keep their voices down so as not to waken any bachelorette indoors,entailment,one scoping
+The guests do not have food.,The guests do not have rice.,entailment,one scoping
+A woman did not like food.,A woman did not like burritos.,entailment,one scoping
+a boy is not concentrating on a machine,a boy is not concentrating on a jukebox,entailment,one scoping
+the boy does not play an instrument,the boy does not play a cornet,entailment,one scoping
+The man is not listening to music.,The man is not listening to reggae.,entailment,one scoping
+The woman is not wearing jewelry,The woman is not wearing necklaces,entailment,one scoping
+A man on top of a ladder not next to a tree,A man on top of a ladder not next to a cedar,entailment,one scoping
+A man is not holding anything in his hands.,A man is not holding machines in his hands.,entailment,one scoping
+A woman did not like food.,A woman did not like pizza.,entailment,one scoping
+The people are not playing instruments.,The people are not playing violins.,entailment,one scoping
+There is not a barge nearby.,There is not a boat nearby.,neutral,one scoping
+A man on top of a ladder not next to a palm,A man on top of a ladder not next to a tree,neutral,one scoping
+The skier did not notice a large willow dragging behind him.,The skier did not notice a large tree dragging behind him.,neutral,one scoping
+The boy is not holding a gun,The boy is not holding a weapon,neutral,one scoping
+There is not a single Democrat walking in the city.,There is not a single person walking in the city.,neutral,one scoping
+The skier did not notice a large cypress dragging behind him.,The skier did not notice a large tree dragging behind him.,neutral,one scoping
+A woman did not like soup.,A woman did not like food.,neutral,one scoping
+a man walks confidently not dropping lettuce,a man walks confidently not dropping produce,neutral,one scoping
+The diver has not seen any tuna on his dive.,The diver has not seen any fish on his dive.,neutral,one scoping
+Two people are not fishing from a skiff,Two people are not fishing from a boat,neutral,one scoping
+The people are not playing tambourines.,The people are not playing instruments.,neutral,one scoping
+There is not a tugboat nearby.,There is not a boat nearby.,neutral,one scoping
+The woman is not wearing earrings.,The woman is not wearing jewelry,neutral,one scoping
+There is not a single painter walking in the city.,There is not a single person walking in the city.,neutral,one scoping
+The man is not listening to polka.,The man is not listening to music.,neutral,one scoping
+The girl here is not wearing any ringlets at all.,The girl here is not wearing any jewelry at all.,neutral,one scoping
+The three children are not holding ferns.,The three children are not holding plants.,neutral,one scoping
+The cowboy did not fall off a stallion at the competition.,The cowboy did not fall off a horse at the competition.,neutral,one scoping
+People do not have any computers,People do not have any machines,neutral,one scoping
+There is not a single prince walking in the city.,There is not a single person walking in the city.,neutral,one scoping
+There is not a single immigrant walking in the city.,There is not a single person walking in the city.,neutral,one scoping
+There is not a single photographer walking in the city.,There is not a single person walking in the city.,neutral,one scoping
+There is not a single sculptor walking in the city.,There is not a single person walking in the city.,neutral,one scoping
+The cowboy did not fall off a Clydesdale at the competition.,The cowboy did not fall off a horse at the competition.,neutral,one scoping
+The restaurant does not let shoeless people in,The restaurant does not let shoeless youths in,entailment,one scoping
+A child is not tossing blocks,A child is not tossing anything,neutral,one scoping
+The skier noticed a large cypress is not dragging behind and not in front of him.,The skier noticed a large tree is not dragging behind and not in front of him.,entailment,both not scoping
+The cowboy was not proud that he fell off a palomino while not at the competition,The cowboy was not proud that he fell off a horse while not at the competition,entailment,both not scoping
+"a boy is concentrating, not distracted, on a motor that is not made of wood","a boy is concentrating, not distracted, on a machine that is not made of wood",entailment,both not scoping
+There is a linguist not working while it is not yet after closing time.,There is a person not working while it is not yet after closing time.,entailment,both not scoping
+"The three children, not the parents, are holding houseplants but not ice creams.","The three children, not the parents, are holding plants but not ice creams.",entailment,both not scoping
+The not older person did like bananas not vegetables.,The not older person did like fruit not vegetables.,entailment,both not scoping
+"a boy is concentrating, not distracted, on a laptop not made of wood","a boy is concentrating, not distracted, on a machine not made of wood",entailment,both not scoping
+Two people not fully awake are fishing from a not very new ferry,Two people not fully awake are fishing from a not very new boat,entailment,both not scoping
+a man walking not so confidently has dropped pears not clothes,a man walking not so confidently has dropped produce not clothes,entailment,both not scoping
+"A man not talking, and wearing a work-shirt, is not sitting on a rock","A man not talking, and wearing a shirt, is not sitting on a rock",entailment,both not scoping
+"The three children, not the teachers, are holding roses but not ice creams.","The three children, not the teachers, are holding plants but not ice creams.",entailment,both not scoping
+The woman who did not show up is wearing rings and seems not happy,The woman who did not show up is wearing jewelry and seems not happy,entailment,both not scoping
+"A gent who is not smiling is cutting hair, not in the background.","A man who is not smiling is cutting hair, not in the background.",entailment,both not scoping
+The diver not wearing a suit has seen trout but not on his dive.,The diver not wearing a suit has seen fish but not on his dive.,entailment,both not scoping
+The not allergic person did like cranberries but prefers not to eat vegetables.,The not allergic person did like fruit but prefers not to eat vegetables.,entailment,both not scoping
+"This not tall man can find a scientist, but not anytime soon","This not tall man can find a person, but not anytime soon",entailment,both not scoping
+"The people who are not professionals play xylophones on stage, but not today.","The people who are not professionals play instruments on stage, but not today.",entailment,both not scoping
+The men were not trying to keep their voices down so they woke some of their siblings who are not indoors,The men were not trying to keep their voices down so they woke some of their relatives who are not indoors,entailment,both not scoping
+There is a boyfriend who is not smiling cutting hair not in the background.,There is a man who is not smiling cutting hair not in the background.,entailment,both not scoping
+There is a single cannibal not walking in the city not after dark.,There is a single person not walking in the city not after dark.,entailment,both not scoping
+"a boy is concentrating, not distracted, on a motor not made of wood","a boy is concentrating, not distracted, on a machine not made of wood",entailment,both not scoping
+There is a single athlete not walking in the city not after dark.,There is a single person not walking in the city not after dark.,entailment,both not scoping
+The not inspired man is listening to reggae for not longer than an hour.,The not inspired man is listening to music for not longer than an hour.,entailment,both not scoping
+"The three children, not the four women, are holding shrubs but not ice creams.","The three children, not the four women, are holding plants but not ice creams.",entailment,both not scoping
+The not tired man is listening to rockabilly not longer than an hour.,The not tired man is listening to music not longer than an hour.,entailment,both not scoping
+The woman who did not show up wearing jewelry is not happy,The woman who did not show up wearing ringlets is not happy,neutral,both not scoping
+"The people who are not pleased are playing instruments, just not loud enough.","The people who are not pleased are playing bagpipes, just not loud enough.",neutral,both not scoping
+A man who is not talking is wearing a shirt and not sitting on a rock,A man who is not talking is wearing a work-shirt and not sitting on a rock,neutral,both not scoping
+There is a person not walking in the city while it is not yet morning.,There is a plumber not walking in the city while it is not yet morning.,neutral,both not scoping
+The diver not wearing a suit has seen fish but not on his dive.,The diver not wearing a suit has seen salmon but not on his dive.,neutral,both not scoping
+This not tall man can find a dog but not anytime soon,This not tall man can find a puppy but not anytime soon,neutral,both not scoping
+"a boy is concentrating, not distracted, on a machine not made of wood","a boy is concentrating, not distracted, on a turbine not made of wood",neutral,both not scoping
+"The not very old person did like fruit, but not vegetables.","The not very old person did like huckleberries, but not vegetables.",neutral,both not scoping
+A woman liked food not from that restaurant that is not far away.,A woman liked pudding not from that restaurant that is not far away.,neutral,both not scoping
+"There is a man not smiling cutting hair, not in the background but near the front.","There is a widower not smiling cutting hair, not in the background but near the front.",neutral,both not scoping
+There is a man wearing a hat not staring at people who are not on a subway.,There is a man wearing a sombrero not staring at people who are not on a subway.,neutral,both not scoping
+"This not fortunate woman can find a dog, just not anytime soon","This not fortunate woman can find a puppy, just not anytime soon",neutral,both not scoping
+"The not older person did like fruit, not vegetables.","The not older person did like cantaloupes, not vegetables.",neutral,both not scoping
+"the boy, not the girl, plays an instrument, but not today","the boy, not the girl, plays a saxophone, but not today",neutral,both not scoping
+The not older person did like fruit not vegetables.,The not older person did like peaches not vegetables.,neutral,both not scoping
+A woman liked food not from that restaurant not far away.,A woman liked guacamole not from that restaurant not far away.,neutral,both not scoping
+There is a single person not walking in the city not after dark.,There is a single addict not walking in the city not after dark.,neutral,both not scoping
+There is a single person not walking in the city not after dark.,There is a single frenchman not walking in the city not after dark.,neutral,both not scoping
+There is a single person not walking in the city not after dark.,There is a single aviator not walking in the city not after dark.,neutral,both not scoping
+There is a single person not walking in the city not after dark.,There is a single philosopher not walking in the city not after dark.,neutral,both not scoping
+A woman liked food not from that restaurant not far away.,A woman liked falafel not from that restaurant not far away.,neutral,both not scoping
+Two people not fully awake are fishing from a not shiny boat,Two people not fully awake are fly-fishing from a not shiny boat,neutral,both not scoping
+There is a single person not walking in the city not after dark.,There is a single landscaper not walking in the city not after dark.,neutral,both not scoping
+People that are not poor have some machines that are not fancy,People that are not poor have some motors that are not fancy,neutral,both not scoping
+"A man who is not here is holding something, but not in his hands.","A man who is not here is holding stamps, but not in his hands.",neutral,both not scoping
+"the boy plays an bassoon, but he does not want to play anymore.","the boy plays an instrument, but he does not want to play anymore.",entailment,one not scoping
+A man who was walking not confidently dropped food.,A man who was walking not confidently dropped produce.,entailment,one not scoping
+"The woman liked corn, not exercise.","The woman liked food, not exercise.",entailment,one not scoping
+The cowboy did not tell other people that he fall off a palomino at the competition.,The cowboy did not tell other people that he fall off a horse at the competition.,entailment,one not scoping
+"A woman liked ratatouille, not exercise.","A woman liked food, not exercise.",entailment,one not scoping
+"A man can find a donkey, just not now.","A man can find an animal, just not now.",entailment,one not scoping
+A man who walked not confidently dropped food.,A man who walked not confidently dropped produce.,entailment,one not scoping
+"the man is cutting the bass, not showering.","the man is cutting the fish, not showering.",entailment,one not scoping
+"The person ate cranberries, not vegetables.","The person ate fruit, not vegetables.",entailment,one not scoping
+The skier noticed a large oak dragging behind him but did not stop.,The skier noticed a large tree dragging behind him but did not stop.,entailment,one not scoping
+"A woman liked breakfast, not exercise.","A woman liked food, not exercise.",entailment,one not scoping
+There is a millionaire walking in the city when it's not dark.,There is a person walking in the city when it's not dark.,entailment,one not scoping
+"The boy can find a turtle, just not now.","The boy can find a reptile, just not now.",entailment,one not scoping
+There is a skier walking in the city when it's not dark.,There is a person walking in the city when it's not dark.,entailment,one not scoping
+The skier noticed a large elm branch dragging behind him but did not move it.,The skier noticed a large tree branch dragging behind him but did not move it.,entailment,one not scoping
+"The men were outside not even trying to keep their voices down, and they woke children indoors.","The men were outside not even trying to keep their voices down, and they woke people indoors.",entailment,one not scoping
+A man does not go out and he wears a bowler.,A man does not go out and he wears a hat.,entailment,one not scoping
+A man who walked not confidently dropped food.,A man who walked not confidently dropped produce.,entailment,one not scoping
+"There is actually a houseboat nearby, not too far away.","There is actually a boat nearby, not too far away.",entailment,one not scoping
+"The dog liked guacamole, not exercise.","The dog liked food, not exercise.",entailment,one not scoping
+"There is a bachelor cutting hair in the background, not putting his head up.","There is a man cutting hair in the background, not putting his head up.",entailment,one not scoping
+"The woman liked eating cakes, not baking.","A woman liked eating desserts, not baking.",entailment,one not scoping
+"the boy plays an xylophone, but he does not want to play anymore.","the boy plays an instrument, but he does not want to play anymore.",entailment,one not scoping
+"There is a man not staring at people on a subway, and he is wearing a sombrero.","There is a man not staring at people on a subway, and he is wearing a hat.",entailment,one not scoping
+There is a merchant walking in the city when it's not dark.,There is a person walking in the city when it's not dark.,entailment,one not scoping
+The man does not dress up when listening to music.,The man does not dress up when listening to reggae.,neutral,one not scoping
+"the boy plays an instrument, but he does not want to play anymore.","the boy plays an guitar, but he does not want to play anymore.",neutral,one not scoping
+"The little boy is wearing jeans, he does not look happy.","The little boy is wearing jeans, he does not look happy.",neutral,one not scoping
+"A woman liked food, not exercise.","A woman liked pudding, not exercise.",neutral,one not scoping
+"The men were outside not even trying to keep their voices down, and they disturbed puppies near them.","The men were outside not even trying to keep their voices down, and they disturbed pets near them.",neutral,one not scoping
+"the boy plays an instrument, but he does not want to play anymore.","the boy plays a flute, but he does not want to play anymore.",neutral,one not scoping
+"The man can call a relative, just not now.","The man can call a sibling, just not now.",neutral,one not scoping
+A male who likes something is not standing here.,A male who likes socks is not standing here.,neutral,one not scoping
+People who are not poor have many machines.,People who are not poor have many jackhammers.,neutral,one not scoping
+"There is a man not staring at people on a subway, and he is wearing a hat.","There is a man not staring at people on a subway, and he is wearing a fedora.",neutral,one not scoping
+"The men were outside not even trying to keep their voices down, and they were annoying other campers.","The men were outside not even trying to keep their voices down, and they were annoying other people.",neutral,one not scoping
+The woman wearing shoes is not crying.,The woman wearing pumps is not crying.,neutral,one not scoping
+A man does not go out and he wears a hat.,A man does not go out and he wears a bowler.,neutral,one not scoping
+The skier noticed a large plant dragging behind him but did not move.,The skier noticed a large willow dragging behind him but did not move.,neutral,one not scoping
+"A man is on top of a ladder next to a tree, not paying attention to his friends.","A man is on top of a ladder next to a magnolia, not paying attention to his friends.",neutral,one not scoping
+There is a person walking in the city when it's not dark.,There is an ambassador walking in the city when it's not dark.,neutral,one not scoping
+"There is a man cutting hair in the background, not putting his head up.","There is a bachelor cutting hair in the background, not putting his head up.",neutral,one not scoping
+"the boy plays an instrument, but he does not want to play anymore.","the boy plays an organ, but he does not want to play anymore.",neutral,one not scoping
+There is a person walking in the city when it's not dark.,There is a cheerleader walking in the city when it's not dark.,neutral,one not scoping
+"The three children are not in the classroom, but they are holding plants.","The three children are not in the classroom, but they are holding daisies.",neutral,one not scoping
+The woman is not wearing a dress but she is wearing jewelry.,The woman is not wearing a dress but she is wearing rings.,neutral,one not scoping
+"The three children are not in the classroom, but they are holding plants.","The three children are not in the classroom, but they are holding lilacs.",neutral,one not scoping
+"the boy plays an instrument, but he does not want to play anymore.","the boy plays an harp, but he does not want to play anymore.",neutral,one not scoping
+"There is a man cutting hair in the background, not putting his head up.","There is a gent cutting hair in the background, not putting his head up.",neutral,one not scoping
+"the boy plays an instrument, but he does not want to play anymore.","the boy plays a fiddle, but he does not want to play anymore.",neutral,one not scoping
+the man not wearing a tie is not cutting the fish,the man not wearing a tie is not cutting the goldfish,entailment,"one scoping, one not"
+There is not a single person not walking in the city.,There is not a single democrat not walking in the city.,entailment,"one scoping, one not"
+A man is not wearing a hat and not running.,A man is not wearing a sombrero and not running.,entailment,"one scoping, one not"
+The people not wearing blue are not playing instruments.,The people not wearing blue are not playing tambourines.,entailment,"one scoping, one not"
+A man not walking can not find a woman,A man not walking can not find a mistress,entailment,"one scoping, one not"
+a not so grown boy is not concentrating on a machine,a not so grown boy is not concentrating on a combine,entailment,"one scoping, one not"
+There is not a single person not walking in the city.,There is not a single woman not walking in the city.,entailment,"one scoping, one not"
+The skier not looking back did not notice a large tree dragging behind him.,The skier not looking back did not notice a large sycamore dragging behind him.,entailment,"one scoping, one not"
+a man walks not so confidently not dropping produce,a man walks not so confidently not dropping bananas,entailment,"one scoping, one not"
+The person did not like fruit and also did not eat meat.,The person did not like blueberries and also did not eat meat.,entailment,"one scoping, one not"
+The boy is not holding a weapon that does not shoot.,The boy is not holding a gun that does not shoot.,entailment,"one scoping, one not"
+The three children not holding plants are not in school today.,The three children not holding ferns are not in school today.,entailment,"one scoping, one not"
+"The person did not like fruit, not meat.","The person did not like watermelons, not meat.",entailment,"one scoping, one not"
+The boy who did not wear shoes did not like vegetables.,The boy who did not wear shoes did not like kale.,entailment,"one scoping, one not"
+People who are not wealthy do not have any computers,People who are not wealthy do not have any laptops,entailment,"one scoping, one not"
+the boy does not play an instrument and also does not like dancing.,the boy does not play an fiddle and also does not like dancing.,entailment,"one scoping, one not"
+the boy does not play an instrument and also does not like dancing.,the boy does not play an piccolo and also does not like dancing.,entailment,"one scoping, one not"
+There is not a single person not walking in the city.,There is not a single programmer not walking in the city.,entailment,"one scoping, one not"
+The girl who is not here is not wearing any jewelry at all.,The girl who is not here is not wearing any necklaces at all.,entailment,"one scoping, one not"
+The cowboy did not fall off a horse at the not so important competition.,The cowboy did not fall off a clydesdale at the not so important competition.,entailment,"one scoping, one not"
+The boy is not holding a gun that does not shoot.,The boy is not holding a handgun that does not shoot.,entailment,"one scoping, one not"
+There is not a single person not walking in the city.,There is not a single linguist not walking in the city.,entailment,"one scoping, one not"
+The people not wearing blue are not playing instruments.,The people not wearing blue are not playing trumpets.,entailment,"one scoping, one not"
+There is not a single person not walking in the city.,There is not a single billionaire not walking in the city.,entailment,"one scoping, one not"
+The girls are not cutting the cake but not letting any people cut it.,The girls are not cutting the cake but not letting any children cut it.,entailment,"one scoping, one not"
+The people not wearing blue are not playing drums.,The people not wearing blue are not playing instruments.,neutral,"one scoping, one not"
+The girl does not wear a sunhat when not sleeping.,The girl does not wear a hat when not sleeping.,neutral,"one scoping, one not"
+"The person did not like apples, not meat.","The person did not like fruit, not meat.",neutral,"one scoping, one not"
+There is not a single serviceman not walking in the city.,There is not a single person not walking in the city.,neutral,"one scoping, one not"
+A seal not moving over there is not tossing balls,A seal not moving over there is not tossing anything,neutral,"one scoping, one not"
+A man is not wearing a sunhat and not running.,A man is not wearing a hat and not running.,neutral,"one scoping, one not"
+A puppy not moving over there is not tossing blocks,A puppy not moving over there is not tossing anything,neutral,"one scoping, one not"
+"The person did not like melons, not meat.","The person did not like fruit, not meat.",neutral,"one scoping, one not"
+the cashier who is not drinking is not at a boutique,a cashier who is not drinking is not at a store,neutral,"one scoping, one not"
+"A woman did not like omelet, not clothes.","A woman did not like food, not clothes.",neutral,"one scoping, one not"
+a man walks not so confidently not dropping carrots,a man walks not so confidently not dropping produce,neutral,"one scoping, one not"
+The skier not looking back did not notice a large birch dragging behind him.,The skier not looking back did not notice a large tree dragging behind him.,neutral,"one scoping, one not"
+"Two, not three, people are not fishing from a kayak","Two, not three, people are not fishing from a boat",neutral,"one scoping, one not"
+"The person did not like lemons, not meat.","The person did not like fruit, not meat.",neutral,"one scoping, one not"
+The girl not here is not wearing any earrings at all.,The girl not here is not wearing any jewelry at all.,neutral,"one scoping, one not"
+There is not a lifeboat nearby when it's not sunny.,There is not a boat nearby when it's not sunny.,neutral,"one scoping, one not"
+a man walks not so confidently not dropping plums,a man walks not so confidently not dropping produce,neutral,"one scoping, one not"
+"the boy does not play an tambourine, he also does not like dancing.","the boy does not play an instrument, he also does not like dancing.",neutral,"one scoping, one not"
+The girls are not cutting the cake but not letting any boyfriend cut it.,The girls are not cutting the cake but not letting any man cut it.,neutral,"one scoping, one not"
+The skier not looking back did not notice a large dogwood dragging behind him.,The skier not looking back did not notice a large tree dragging behind him.,neutral,"one scoping, one not"
+"the boy does not play an guitar, he also does not like dancing.","the boy does not play an instrument, he also does not like dancing.",neutral,"one scoping, one not"
+People who are not wealthy do not have any generators,People who are not wealthy do not have any machines,neutral,"one scoping, one not"
+"A woman did not like gyro, not clothes.","A woman did not like food, not clothes.",neutral,"one scoping, one not"
+a man walks not so confidently while not dropping watermelons,a man walks not so confidently while not dropping produce,neutral,"one scoping, one not"
+The woman who did not like clothes did not like meatloaf.,The woman who did not like clothes did not like meat.,neutral,"one scoping, one not"
